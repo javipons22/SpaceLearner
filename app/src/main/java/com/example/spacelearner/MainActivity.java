@@ -1,5 +1,6 @@
 package com.example.spacelearner;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.spacelearner.ui.main.SectionsPagerAdapter;
+
+import java.security.AccessController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,9 +33,11 @@ public class MainActivity extends AppCompatActivity {
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MainActivity_temp.class);
+                //intent.putExtra("url", current.getUrl());
+
+                v.getContext().startActivity(intent);
             }
         });
     }
