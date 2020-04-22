@@ -6,6 +6,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
+import com.example.spacelearner.Action;
+import com.example.spacelearner.MainActivity;
+
+import java.util.List;
+
 public class PageViewModel extends ViewModel {
 
     private MutableLiveData<Integer> mIndex = new MutableLiveData<>();
@@ -22,6 +27,10 @@ public class PageViewModel extends ViewModel {
 
     public LiveData<String> getText() {
         return mText;
+    }
+
+    public List<Action> getActions() {
+        return MainActivity.database.actionDao().getAll();
     }
 
 }

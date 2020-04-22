@@ -29,6 +29,8 @@ import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
 
+
+
     public static class TodoViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView textView;
@@ -36,8 +38,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         TodoViewHolder(View view) {
             super(view);
 
-            containerView = view.findViewById(R.id.pokedex_row);
-            textView = view.findViewById(R.id.pokedex_row_text_view);
+            containerView = view.findViewById(R.id.action_row);
+            textView = view.findViewById(R.id.action_row_text_view);
         }
     }
 

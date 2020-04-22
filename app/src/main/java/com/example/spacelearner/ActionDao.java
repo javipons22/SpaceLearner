@@ -21,4 +21,7 @@ public interface ActionDao {
 
     @Query("SELECT content FROM actions")
     List<String> getContents();
+
+    @Query("DELETE FROM actions WHERE content = :content")
+    void deleteAll(String content);
 }

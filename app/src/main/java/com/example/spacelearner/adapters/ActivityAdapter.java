@@ -30,18 +30,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActionViewHolder> {
+
+    private List<Action> actions;
+
+    public ActivityAdapter (List<Action> actions) {
+        this.actions = actions;
+    }
+
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView nameTextView;
 
         public ActionViewHolder(View view) {
             super(view);
-            this.containerView = view.findViewById(R.id.pokedex_row);
-            this.nameTextView = view.findViewById(R.id.pokedex_row_text_view);
+            this.containerView = view.findViewById(R.id.action_row);
+            this.nameTextView = view.findViewById(R.id.action_row_text_view);
         }
     }
 
-    private List<Action> actions = new ArrayList<>();
+
 
     @Override
     public ActionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -63,9 +70,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         return actions.size();
     }
 
-    public void reload() {
-        actions = MainActivity.database.actionDao().getAll();
-        Log.d("javito", MainActivity.database.actionDao().getContents().toString());
-        notifyDataSetChanged();
+    public static List<Action> reload() {
+       return MainActivity.database.actionDao().getAll();
     }
 }

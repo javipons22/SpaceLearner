@@ -35,8 +35,8 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.TodoViewHolder
         TodoViewHolder(View view) {
             super(view);
 
-            containerView = view.findViewById(R.id.pokedex_row);
-            textView = view.findViewById(R.id.pokedex_row_text_view);
+            containerView = view.findViewById(R.id.action_row);
+            textView = view.findViewById(R.id.action_row_text_view);
         }
     }
 
