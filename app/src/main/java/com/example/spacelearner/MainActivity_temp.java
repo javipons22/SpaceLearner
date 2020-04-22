@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.spacelearner.adapters.TodoAdapter;
+
 public class MainActivity_temp extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
@@ -17,7 +19,7 @@ public class MainActivity_temp extends AppCompatActivity {
         setContentView(R.layout.activity_temp);
 
         recyclerView = findViewById(R.id.recycler_view);
-        adapter = new PokedexAdapter(getApplicationContext());
+        adapter = new TodoAdapter(getApplicationContext());
         layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setAdapter(adapter);

@@ -1,7 +1,6 @@
-package com.example.spacelearner;
+package com.example.spacelearner.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,21 +17,22 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.spacelearner.Pokemon;
+import com.example.spacelearner.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexViewHolder> {
-    public static class PokedexViewHolder extends RecyclerView.ViewHolder {
+public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+    public static class TodoViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView textView;
 
-        PokedexViewHolder(View view) {
+        TodoViewHolder(View view) {
             super(view);
 
             containerView = view.findViewById(R.id.pokedex_row);
@@ -43,7 +43,7 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
     private List<Pokemon> pokemon = new ArrayList<>();
     private RequestQueue requestQueue;
 
-    PokedexAdapter(Context context) {
+    public TodoAdapter(Context context) {
         requestQueue = Volley.newRequestQueue(context);
         loadPokemon();
     }
@@ -81,15 +81,15 @@ public class PokedexAdapter extends RecyclerView.Adapter<PokedexAdapter.PokedexV
 
     @NonNull
     @Override
-    public PokedexViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.pokedex_row, parent, false);
 
-        return new PokedexViewHolder(view);
+        return new TodoViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PokedexViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
         Pokemon current = pokemon.get(position);
         holder.textView.setText(current.getName());
         holder.containerView.setTag(current);

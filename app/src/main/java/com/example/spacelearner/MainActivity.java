@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MainActivity_temp.class);
-                //intent.putExtra("url", current.getUrl());
-
                 v.getContext().startActivity(intent);
             }
         });
