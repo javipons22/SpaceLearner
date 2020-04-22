@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+
     public static class TodoViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView textView;

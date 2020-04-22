@@ -8,8 +8,10 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground">
+
     <TextView
+        android:id="@+id/pokedex_row_text_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/pokedex_row_text_view" />
+        android:layout_height="47dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 </LinearLayout>

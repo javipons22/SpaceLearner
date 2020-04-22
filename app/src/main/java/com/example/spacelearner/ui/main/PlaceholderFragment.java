@@ -73,9 +73,8 @@ public class PlaceholderFragment extends Fragment {
             root = inflater.inflate(R.layout.fragment_todo, container, false);
 
             recyclerView = root.findViewById(R.id.recycler_view_todo);
-            adapter = new ActivityAdapter(getContext());
+            adapter = new ActivityAdapter();
             layoutManager = new LinearLayoutManager(getContext());
-
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
             return root;
