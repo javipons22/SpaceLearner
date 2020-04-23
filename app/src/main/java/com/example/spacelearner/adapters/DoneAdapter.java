@@ -17,6 +17,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.spacelearner.Action;
+import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.Pokemon;
 import com.example.spacelearner.R;
 
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.TodoViewHolder> {
+
     public static class TodoViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView textView;
@@ -40,44 +43,17 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.TodoViewHolder
         }
     }
 
-    private List<Pokemon> pokemon = new ArrayList<>();
-    private RequestQueue requestQueue;
+    private List<Action> pokemon = new ArrayList<>();
+    //private RequestQueue requestQueue;
 
-    public DoneAdapter(Context context) {
-        requestQueue = Volley.newRequestQueue(context);
-        loadPokemon();
-    }
+    //public DoneAdapter() {
+        //requestQueue = Volley.newRequestQueue(context);
+        //loadPokemon();
+    //}
 
-    public void loadPokemon() {
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=7";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray results = response.getJSONArray("results");
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject result = results.getJSONObject(i);
-                        String name = result.getString("name");
-                        pokemon.add(new Pokemon(
-                            name.substring(0, 1).toUpperCase() + name.substring(1),
-                            result.getString("url")
-                        ));
-                    }
-
-                    notifyDataSetChanged();
-                } catch (JSONException e) {
-                    Log.e("cs50", "Json error", e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("cs50", "Pokemon list error", error);
-            }
-        });
-
-        requestQueue.add(request);
-    }
+    //public void loadPokemon() {
+        //pokemon = MainActivity.database.actionDao().getAll();
+    //}
 
     @NonNull
     @Override
@@ -90,13 +66,19 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.TodoViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
-        Pokemon current = pokemon.get(position);
-        holder.textView.setText(current.getName());
+        Action current = pokemon.get(position);
+        holder.textView.setText(current.content);
         holder.containerView.setTag(current);
     }
 
     @Override
     public int getItemCount() {
         return pokemon.size();
+    }
+
+    public void reload() {
+        pokemon = MainActivity.database.actionDao().getAll();
+        //Log.d("javito", MainActivity.database.actionDao().getContents().toString());
+        notifyDataSetChanged();
     }
 }

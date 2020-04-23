@@ -33,9 +33,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
 
     private List<Action> actions;
 
-    public ActivityAdapter (List<Action> actions) {
-        this.actions = actions;
-    }
+    //public ActivityAdapter (List<Action> actions) {
+       // this.actions = actions;
+    //}
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -48,7 +48,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         }
     }
 
-
+    public ActivityAdapter() {
+        this.actions = MainActivity.database.actionDao().getAll();
+    }
 
     @Override
     public ActionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -70,7 +72,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         return actions.size();
     }
 
-    public static List<Action> reload() {
-       return MainActivity.database.actionDao().getAll();
+    public void reload() {
+        actions = MainActivity.database.actionDao().getAll();
+        Log.d("javito", MainActivity.database.actionDao().getContents().toString());
+        notifyDataSetChanged();
     }
 }

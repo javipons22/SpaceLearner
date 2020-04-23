@@ -2,11 +2,13 @@ package com.example.spacelearner.ui.main;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.spacelearner.R;
 
@@ -14,7 +16,7 @@ import com.example.spacelearner.R;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2, R.string.tab_text_3};
@@ -32,6 +34,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return PlaceholderFragment.newInstance(position + 1);
     }
 
+    public void reload() {
+        notifyDataSetChanged();
+    }
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -42,5 +48,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         // Show 3 total pages.
         return 3;
+    }
+
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+            return POSITION_NONE;
     }
 }

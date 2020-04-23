@@ -1,6 +1,7 @@
 package com.example.spacelearner.ui.main;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.adapters.ActivityAdapter;
 import com.example.spacelearner.R;
 import com.example.spacelearner.adapters.DoneAdapter;
@@ -73,7 +75,7 @@ public class PlaceholderFragment extends Fragment {
             root = inflater.inflate(R.layout.fragment_todo, container, false);
 
             recyclerView = root.findViewById(R.id.recycler_view_todo);
-            adapter = new ActivityAdapter(pageViewModel.getActions());
+            adapter = new ActivityAdapter();
             layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
@@ -82,12 +84,18 @@ public class PlaceholderFragment extends Fragment {
             root = inflater.inflate(R.layout.fragment_todo, container, false);
 
             recyclerView = root.findViewById(R.id.recycler_view_todo);
-            adapter = new DoneAdapter(getContext());
+            adapter = new DoneAdapter();
             layoutManager = new LinearLayoutManager(getContext());
 
             recyclerView.setAdapter(adapter);
             recyclerView.setLayoutManager(layoutManager);
             return root;
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("javos", "onResume: javos");
+        //adapter3.reload();
     }
 }
