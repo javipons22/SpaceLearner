@@ -7,8 +7,8 @@ import java.util.List;
 
 @Dao
 public interface ActionDao {
-    @Query("INSERT INTO actions (content) VALUES ('New action')")
-    void create();
+    @Query("INSERT INTO actions (content) VALUES (:content)")
+    void create(String content);
 
     @Query("SELECT * FROM actions")
     List<Action> getAll();
@@ -22,6 +22,6 @@ public interface ActionDao {
     @Query("SELECT content FROM actions")
     List<String> getContents();
 
-    @Query("DELETE FROM actions WHERE content = :content")
-    void deleteAll(String content);
+    @Query("DELETE FROM actions")
+    void deleteAll();
 }
