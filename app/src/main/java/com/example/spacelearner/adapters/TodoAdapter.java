@@ -86,7 +86,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     @Override
     public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.pokedex_row, parent, false);
+                .inflate(R.layout.fragment_row, parent, false);
 
         return new TodoViewHolder(view);
     }

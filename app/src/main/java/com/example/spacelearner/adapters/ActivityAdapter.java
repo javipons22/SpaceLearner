@@ -1,41 +1,22 @@
 package com.example.spacelearner.adapters;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.spacelearner.Action;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActionViewHolder> {
 
     private List<Action> actions;
-
-    //public ActivityAdapter (List<Action> actions) {
-       // this.actions = actions;
-    //}
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -55,7 +36,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
     @Override
     public ActionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.pokedex_row, parent, false);
+                .inflate(R.layout.fragment_row, parent, false);
 
         return new ActionViewHolder(view);
     }
@@ -72,9 +53,4 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         return actions.size();
     }
 
-    public void reload() {
-        actions = MainActivity.database.actionDao().getAll();
-        Log.d("javito", MainActivity.database.actionDao().getContents().toString());
-        notifyDataSetChanged();
-    }
 }
