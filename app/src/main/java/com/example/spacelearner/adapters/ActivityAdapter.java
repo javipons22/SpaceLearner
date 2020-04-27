@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.spacelearner.Action;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
+import com.example.spacelearner.TimeLeftCalculator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActionViewHolder> {
@@ -21,11 +24,13 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
         public TextView nameTextView;
+        public TextView dateTextView;
 
         public ActionViewHolder(View view) {
             super(view);
             this.containerView = view.findViewById(R.id.action_row);
             this.nameTextView = view.findViewById(R.id.action_row_text_view);
+            this.dateTextView = view.findViewById(R.id.action_row_date_view);
         }
     }
 
@@ -43,9 +48,12 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
 
     @Override
     public void onBindViewHolder(ActionViewHolder holder, int position) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        Date date = new Date();
         Action current = actions.get(position);
         holder.containerView.setTag(current);
         holder.nameTextView.setText(current.content);
+        holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), "04/27/2020 18:11"));
     }
 
     @Override

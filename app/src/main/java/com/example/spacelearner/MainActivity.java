@@ -1,7 +1,9 @@
 package com.example.spacelearner;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static ActionsDatabase database;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private TabLayout tabs;
+    private BroadcastReceiver minuteUpdateReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +64,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    public void startMinuteUpdater() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_TIME_TICK);
+        minuteUpdateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                sectionsPagerAdapter.reload();
+            }
+        };
+
+        registerReceiver(minuteUpdateReceiver, intentFilter);
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
         sectionsPagerAdapter.reload();
+        startMinuteUpdater();
     }
 
     @Override
@@ -72,5 +89,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 //        With onPause we make sure that the tab that opens after coming back from AddActivity is tab "ACTIVITY" (index 1)
         tabs.getTabAt(1).select();
+        unregisterReceiver(minuteUpdateReceiver);
     }
 }
