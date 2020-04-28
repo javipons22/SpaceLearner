@@ -19,7 +19,7 @@ import com.example.spacelearner.ui.main.SectionsPagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static ActionsDatabase database;
+    public static ActionsDatabase2 database;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private TabLayout tabs;
     private BroadcastReceiver minuteUpdateReceiver;
@@ -36,8 +36,9 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
 
         database = Room
-                .databaseBuilder(getApplicationContext(), ActionsDatabase.class, "actions")
+                .databaseBuilder(getApplicationContext(), ActionsDatabase2.class, "actions5")
                 .allowMainThreadQueries()
+//                .fallbackToDestructiveMigration()
                 .build();
 
 
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(v.getContext(), AddActivity.class);
                 context.startActivity(intent);
 //                  In case you need to delete the database elements for testing (uncomment following line)
-//                  database.actionDao().deleteAll("New action");
+//                  database.actionDao().deleteAll();
 //
 //                  Before I was trying to reload from the adapter; but it has to be done from the sectionsPagerAdapter
 //                  Also you need to add the function getItemPosition in sectionsPagerAdapter

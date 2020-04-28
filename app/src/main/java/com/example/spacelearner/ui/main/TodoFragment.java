@@ -36,7 +36,7 @@ public class TodoFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_todo, container, false);
 
         recyclerView = root.findViewById(R.id.recycler_view_todo);
-        adapter = new TodoAdapter(getContext());
+        adapter = new TodoAdapter();
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(layoutManager);

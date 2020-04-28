@@ -1,105 +1,69 @@
 package com.example.spacelearner.adapters;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.spacelearner.Pokemon;
+import com.example.spacelearner.Action3;
+import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
+import com.example.spacelearner.TimeLeftCalculator;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
+public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHolder> {
 
+    private List<Action3> actions;
 
-
-    public static class TodoViewHolder extends RecyclerView.ViewHolder {
+    public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
-        public TextView textView;
+        public TextView nameTextView;
+        public TextView dateTextView;
 
-        TodoViewHolder(View view) {
+        public ActionViewHolder(View view) {
             super(view);
-
-            containerView = view.findViewById(R.id.action_row);
-            textView = view.findViewById(R.id.action_row_text_view);
+            this.containerView = view.findViewById(R.id.action_row);
+            this.nameTextView = view.findViewById(R.id.action_row_text_view);
+            this.dateTextView = view.findViewById(R.id.action_row_date_view);
         }
     }
 
-    private List<Pokemon> pokemon = new ArrayList<>();
-    private RequestQueue requestQueue;
-
-    public TodoAdapter(Context context) {
-        requestQueue = Volley.newRequestQueue(context);
-        loadPokemon();
+    public TodoAdapter() {
+        this.actions = MainActivity.database.actionDao().getAll();
     }
 
-    public void loadPokemon() {
-        String url = "https://pokeapi.co/api/v2/pokemon?limit=3";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONArray results = response.getJSONArray("results");
-                    for (int i = 0; i < results.length(); i++) {
-                        JSONObject result = results.getJSONObject(i);
-                        String name = result.getString("name");
-                        pokemon.add(new Pokemon(
-                            name.substring(0, 1).toUpperCase() + name.substring(1),
-                            result.getString("url")
-                        ));
-                    }
-
-                    notifyDataSetChanged();
-                } catch (JSONException e) {
-                    Log.e("cs50", "Json error", e);
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("cs50", "Pokemon list error", error);
-            }
-        });
-
-        requestQueue.add(request);
-    }
-
-    @NonNull
     @Override
-    public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ActionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_row, parent, false);
 
-        return new TodoViewHolder(view);
+        return new ActionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
-        Pokemon current = pokemon.get(position);
-        holder.textView.setText(current.getName());
+    public void onBindViewHolder(ActionViewHolder holder, int position) {
+        Action3 current = actions.get(position);
+
+        // All functions for calculating date diff with TimeLeftCalculator
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        Date date = new Date();
+        Date nextRevision = new Date(current.nextRevision);
+        String nextRevisionFormatted = formatter.format(nextRevision);
+
         holder.containerView.setTag(current);
+        holder.nameTextView.setText(current.content);
+        holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), nextRevisionFormatted));
     }
 
     @Override
     public int getItemCount() {
-        return pokemon.size();
+        return actions.size();
     }
+
 }

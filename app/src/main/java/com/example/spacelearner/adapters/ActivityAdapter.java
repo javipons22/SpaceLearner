@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spacelearner.Action;
+import com.example.spacelearner.Action3;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
 import com.example.spacelearner.TimeLeftCalculator;
@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActionViewHolder> {
 
-    private List<Action> actions;
+    private List<Action3> actions;
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -48,12 +48,17 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
 
     @Override
     public void onBindViewHolder(ActionViewHolder holder, int position) {
+        Action3 current = actions.get(position);
+
+        // All functions for calculating date diff with TimeLeftCalculator
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date date = new Date();
-        Action current = actions.get(position);
+        Date nextRevision = new Date(current.nextRevision);
+        String nextRevisionFormatted = formatter.format(nextRevision);
+
         holder.containerView.setTag(current);
         holder.nameTextView.setText(current.content);
-        holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), "04/27/2020 18:11"));
+        holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), nextRevisionFormatted));
     }
 
     @Override

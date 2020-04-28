@@ -16,7 +16,7 @@ public class TimeLeftCalculator {
 //            String time2 = "12:15";
 
             String format = "MM/dd/yyyy HH:mm";
-            Log.d("javitioo", date1);
+            //Log.d("javitioo", date1);
             SimpleDateFormat sdf = new SimpleDateFormat(format);
 
             Date dateObj1 = sdf.parse(date1);

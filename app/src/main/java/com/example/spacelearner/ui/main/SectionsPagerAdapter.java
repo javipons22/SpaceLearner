@@ -1,6 +1,7 @@
 package com.example.spacelearner.ui.main;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -34,9 +35,10 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
             return TodoFragment.newInstance();
         } else if (position == 1) {
             return ActivityFragment.newInstance();
-        } else {
+        } else if (position == 2){
             return DoneFragment.newInstance();
         }
+        return new TodoFragment();
     }
 
     public void reload() {

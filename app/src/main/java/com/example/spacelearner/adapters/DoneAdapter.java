@@ -6,50 +6,59 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spacelearner.Action;
+import com.example.spacelearner.Action3;
+import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
+import com.example.spacelearner.TimeLeftCalculator;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.TodoViewHolder> {
+public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ActionViewHolder> {
 
-    public static class TodoViewHolder extends RecyclerView.ViewHolder {
+    private List<Action3> actions;
+
+    public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
-        public TextView textView;
+        public TextView nameTextView;
+        public TextView dateTextView;
 
-        TodoViewHolder(View view) {
+        public ActionViewHolder(View view) {
             super(view);
-
-            containerView = view.findViewById(R.id.action_row);
-            textView = view.findViewById(R.id.action_row_text_view);
+            this.containerView = view.findViewById(R.id.action_row);
+            this.nameTextView = view.findViewById(R.id.action_row_text_view);
+            this.dateTextView = view.findViewById(R.id.action_row_date_view);
         }
     }
 
-    private List<Action> pokemon = new ArrayList<>();
+    public DoneAdapter() {
+        this.actions = MainActivity.database.actionDao().getAll();
+    }
 
-    @NonNull
     @Override
-    public TodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ActionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_row, parent, false);
 
-        return new TodoViewHolder(view);
+        return new ActionViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodoViewHolder holder, int position) {
-        Action current = pokemon.get(position);
-        holder.textView.setText(current.content);
+    public void onBindViewHolder(ActionViewHolder holder, int position) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+        Date date = new Date();
+        Action3 current = actions.get(position);
         holder.containerView.setTag(current);
-    }
+        holder.nameTextView.setText(current.content);
+        holder.dateTextView.setText("date");
+}
 
     @Override
     public int getItemCount() {
-        return pokemon.size();
+        return actions.size();
     }
 
 }
