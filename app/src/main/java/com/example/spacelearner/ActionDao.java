@@ -7,8 +7,8 @@ import java.util.List;
 
 @Dao
 public interface ActionDao {
-    @Query("INSERT INTO actions3 (content,addedDate,revisionsAmount,nextRevision) VALUES (:content,:createdDate,:revisions,:nextRevision)")
-    void create(String content,Long createdDate,int revisions,Long nextRevision);
+    @Query("INSERT INTO actions3 (content,addedDate,revisionsAmount,nextRevision,maxRevisions) VALUES (:content,:createdDate,:revisions,:nextRevision,:maxRevisions)")
+    void create(String content,Long createdDate,int revisions,Long nextRevision,int maxRevisions);
 
     @Query("SELECT * FROM actions3 ORDER BY addedDate DESC")
     List<Action3> getAll();

@@ -20,4 +20,7 @@ public class Action3 {
 
     @ColumnInfo(name = "revisionsAmount")
     public int revisions;
+
+    @ColumnInfo(name = "maxRevisions")
+    public int maxRevisions;
 }

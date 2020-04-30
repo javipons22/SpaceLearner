@@ -35,10 +35,12 @@ public class MainActivity extends AppCompatActivity {
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
 
+
         database = Room
                 .databaseBuilder(getApplicationContext(), ActionsDatabase2.class, "actions5")
                 .allowMainThreadQueries()
 //                .fallbackToDestructiveMigration()
+//                .addMigrations(ActionsDatabase2.MIGRATION_1_2)
                 .build();
 
 
