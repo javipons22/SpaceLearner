@@ -34,7 +34,7 @@ public class AddActivity extends AppCompatActivity {
                     now = new Date();
                     currentDate = now.getTime();
                     nextRevisionDate = currentDate + 24 * 60 * 60 * 1000;
-                    MainActivity.database.actionDao().create(content,currentDate,0,nextRevisionDate,4);
+                    MainActivity.database.actionDao().create(content,currentDate,0,nextRevisionDate,3);
                     finish();
                 }
 

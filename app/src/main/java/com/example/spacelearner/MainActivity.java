@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         sectionsPagerAdapter.reload();
+//        With onResume we make sure that the tab that opens after coming back from AddActivity is tab "ACTIVITY" (index 1)
+        tabs.getTabAt(1).select();
         startMinuteUpdater();
     }
 
@@ -91,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 //        With onPause we make sure that the tab that opens after coming back from AddActivity is tab "ACTIVITY" (index 1)
-        tabs.getTabAt(1).select();
+//        tabs.getTabAt(1).select();
+//        deleted because we might just need this functionality in the onResume() function call
         unregisterReceiver(minuteUpdateReceiver);
     }
 }

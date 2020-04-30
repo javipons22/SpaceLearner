@@ -16,7 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Complete information about the book" />
+            android:text="Edit / Mark as Revised (book)" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -39,13 +39,34 @@
             android:layout_marginBottom="50dp"/>
 
         <Button
-            android:id="@+id/submit"
+            android:id="@+id/button_revised"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="REVISION DONE"
             android:background="@color/colorAccent"
             android:textColor="@color/white"
-            android:text="ADD" />
+            android:layout_marginBottom="20dp"
+            />
+        <Button
+            android:id="@+id/button_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="EDIT BOOK"
+            android:background="@color/editYellow"
+            android:textColor="@color/white"
+            android:layout_marginBottom="20dp"/>
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            android:layout_marginBottom="20dp"
+            android:background="@color/deleteRed"
+            android:textColor="@color/white"/>
+
 
     </LinearLayout>
+
+
 
 </RelativeLayout>
