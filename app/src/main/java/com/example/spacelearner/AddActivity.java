@@ -34,7 +34,7 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 title = bookName.getText().toString();
                 chapterNumber = chapter.getText().toString();
-                if (title.length() > 0) {
+                if (title.length() > 0 && chapterNumber.length() > 0) {
                     now = new Date();
                     currentDate = now.getTime();
                     nextRevisionDate = currentDate + 1 * 60 * 1000;

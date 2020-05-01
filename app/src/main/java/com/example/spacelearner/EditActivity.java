@@ -2,6 +2,7 @@ package com.example.spacelearner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,8 +32,10 @@ public class EditActivity extends AppCompatActivity {
 
         name = getIntent().getStringExtra("name");
         chapter = getIntent().getStringExtra("chapter");
-        id = getIntent().getIntExtra("id",0);
         previousTab = getIntent().getStringExtra("FROM_TAB");
+        id = getIntent().getIntExtra("id",0);
+
+
 
         bookName = (EditText) findViewById(R.id.book_name);
         editButton = (Button) findViewById(R.id.button_edit);
@@ -52,13 +55,10 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 bookString = bookName.getText().toString();
                 chapterString = chapterNumber.getText().toString();
-//                if (content.length() > 0) {
-//                    now = new Date();
-//                    currentDate = now.getTime();
-//                    nextRevisionDate = currentDate + 24 * 60 * 60 * 1000;
+               if (bookString.length() > 0 && chapterString.length() > 0) {
                     MainActivity.database.actionDao().updateValues(bookString,chapterString,id);
                     finish();
-//                }
+               }
 
             }
         });

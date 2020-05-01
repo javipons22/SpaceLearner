@@ -8,18 +8,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spacelearner.Action3;
+import com.example.spacelearner.Book;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
-import com.example.spacelearner.TimeLeftCalculator;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ActionViewHolder> {
 
-    private List<Action3> actions;
+    private List<Book> actions;
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -50,8 +47,8 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ActionViewHold
 
     @Override
     public void onBindViewHolder(ActionViewHolder holder, int position) {
-        Action3 current = actions.get(position);
-        
+        Book current = actions.get(position);
+
         holder.containerView.setTag(current);
         holder.nameTextView.setText(current.title);
         holder.chapterTextView.setText("Chapter " + current.chapter);

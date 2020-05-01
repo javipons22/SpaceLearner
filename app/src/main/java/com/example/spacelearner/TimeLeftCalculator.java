@@ -10,13 +10,7 @@ public class TimeLeftCalculator {
     public static String getTimeLeft(String date1, String date2) {
         String timeLeft = "Not defined";
         try {
-//            String date1 = "07/15/2016";
-//            String time1 = "11:00";
-//            String date2 = "07/17/2016";
-//            String time2 = "12:15";
-
             String format = "MM/dd/yyyy HH:mm";
-            //Log.d("javitioo", date1);
             SimpleDateFormat sdf = new SimpleDateFormat(format);
 
             Date dateObj1 = sdf.parse(date1);
@@ -50,10 +44,6 @@ public class TimeLeftCalculator {
             } else {
                 timeLeft = "Next Revision in 1 minute";
             }
-//            int diffsec = (int) (diff / (1000));
-//            System.out.println("difference between seconds: " + crunchifyFormatter.format(diffsec));
-//
-//            System.out.println("difference between milliseconds: " + crunchifyFormatter.format(diff));
 
         } catch (Exception e) {
             e.printStackTrace();

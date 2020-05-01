@@ -1,7 +1,6 @@
 package com.example.spacelearner.adapters;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spacelearner.Action3;
+import com.example.spacelearner.Book;
 import com.example.spacelearner.EditActivity;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
@@ -22,7 +21,7 @@ import java.util.List;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ActionViewHolder> {
 
-    private List<Action3> actions;
+    private List<Book> actions;
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -40,7 +39,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
             containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Action3 current = (Action3) containerView.getTag();
+                    Book current = (Book) containerView.getTag();
                     Intent intent = new Intent(v.getContext(), EditActivity.class);
                     intent.putExtra("name", current.title);
                     intent.putExtra("id",current.id);
@@ -69,7 +68,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
 
     @Override
     public void onBindViewHolder(ActionViewHolder holder, int position) {
-        Action3 current = actions.get(position);
+        Book current = actions.get(position);
 
         // All functions for calculating date diff with TimeLeftCalculator
         SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");

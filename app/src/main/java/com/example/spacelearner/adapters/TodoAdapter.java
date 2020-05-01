@@ -9,19 +9,17 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.spacelearner.Action3;
+import com.example.spacelearner.Book;
 import com.example.spacelearner.EditActivity;
 import com.example.spacelearner.MainActivity;
 import com.example.spacelearner.R;
-import com.example.spacelearner.TimeLeftCalculator;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHolder> {
 
-    private List<Action3> actions;
+    private List<Book> actions;
 
     public static class ActionViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout containerView;
@@ -39,7 +37,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHold
             containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Action3 current = (Action3) containerView.getTag();
+                    Book current = (Book) containerView.getTag();
                     Intent intent = new Intent(v.getContext(), EditActivity.class);
                     intent.putExtra("name", current.title);
                     intent.putExtra("id",current.id);
@@ -68,7 +66,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHold
 
     @Override
     public void onBindViewHolder(ActionViewHolder holder, int position) {
-        Action3 current = actions.get(position);
+        Book current = actions.get(position);
 
         holder.containerView.setTag(current);
         holder.nameTextView.setText(current.title);

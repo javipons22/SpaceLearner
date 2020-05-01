@@ -19,10 +19,11 @@ import com.example.spacelearner.ui.main.SectionsPagerAdapter;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static ActionsDatabase2 database;
+    public static BookDatabase database;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private TabLayout tabs;
     private BroadcastReceiver minuteUpdateReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         database = Room
-                .databaseBuilder(getApplicationContext(), ActionsDatabase2.class, "actions5")
+                .databaseBuilder(getApplicationContext(), BookDatabase.class, "books")
                 .allowMainThreadQueries()
-                .fallbackToDestructiveMigration()
+//                .fallbackToDestructiveMigration()
 //                .addMigrations(ActionsDatabase2.MIGRATION_1_2)
                 .build();
 
@@ -50,12 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
 //                In case you need to delete the database elements for testing (uncomment following line)
 //                database.actionDao().deleteAll();
-
                 Context context = v.getContext();
                 Intent intent = new Intent(v.getContext(), AddActivity.class);
                 context.startActivity(intent);
-//                  In case you need to delete the database elements for testing (uncomment following line)
-//                  database.actionDao().deleteAll();
 //
 //                  Before I was trying to reload from the adapter; but it has to be done from the sectionsPagerAdapter
 //                  Also you need to add the function getItemPosition in sectionsPagerAdapter
@@ -83,18 +81,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         sectionsPagerAdapter.reload();
+        startMinuteUpdater();
 //        With onResume we make sure that the tab that opens after coming back from AddActivity is tab "ACTIVITY" (index 1)
         tabs.getTabAt(1).select();
-        startMinuteUpdater();
+
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        With onPause we make sure that the tab that opens after coming back from AddActivity is tab "ACTIVITY" (index 1)
-//        tabs.getTabAt(1).select();
-//        deleted because we might just need this functionality in the onResume() function call
         unregisterReceiver(minuteUpdateReceiver);
     }
 }
