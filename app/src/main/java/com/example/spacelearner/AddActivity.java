@@ -33,7 +33,7 @@ public class AddActivity extends AppCompatActivity {
                 if (content.length() > 0) {
                     now = new Date();
                     currentDate = now.getTime();
-                    nextRevisionDate = currentDate + 24 * 60 * 60 * 1000;
+                    nextRevisionDate = currentDate + 1 * 60 * 1000;
                     MainActivity.database.actionDao().create(content,currentDate,0,nextRevisionDate,3);
                     finish();
                 }

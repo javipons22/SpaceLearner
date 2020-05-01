@@ -51,7 +51,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
     }
 
     public ActivityAdapter() {
-        this.actions = MainActivity.database.actionDao().getAll();
+        Date dateNow = new Date();
+        Long dateNowNumber = dateNow.getTime();
+        this.actions = MainActivity.database.actionDao().getAllActivities(dateNowNumber);
     }
 
     @Override

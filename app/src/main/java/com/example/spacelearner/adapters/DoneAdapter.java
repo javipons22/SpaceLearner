@@ -35,7 +35,7 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ActionViewHold
     }
 
     public DoneAdapter() {
-        this.actions = MainActivity.database.actionDao().getAll();
+        this.actions = MainActivity.database.actionDao().getAllDone();
     }
 
     @Override

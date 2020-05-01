@@ -64,5 +64,13 @@ public class EditActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        reviseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.database.actionDao().updateRevisionsAmount(3,id);
+                finish();
+            }
+        });
     }
 }

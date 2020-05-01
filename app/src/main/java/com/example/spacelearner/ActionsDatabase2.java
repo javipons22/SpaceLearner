@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Action3.class}, version = 2)
+@Database(entities = {Action3.class}, version = 1)
 public abstract class ActionsDatabase2 extends RoomDatabase {
     public abstract ActionDao actionDao();
 

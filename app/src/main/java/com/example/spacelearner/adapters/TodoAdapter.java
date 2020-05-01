@@ -50,7 +50,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHold
     }
 
     public TodoAdapter() {
-        this.actions = MainActivity.database.actionDao().getAll();
+        Date dateNow = new Date();
+        Long dateNowNumber = dateNow.getTime();
+        this.actions = MainActivity.database.actionDao().getAllTodos(dateNowNumber);
     }
 
     @Override
