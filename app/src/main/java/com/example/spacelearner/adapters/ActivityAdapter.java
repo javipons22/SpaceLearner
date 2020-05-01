@@ -28,20 +28,23 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         public LinearLayout containerView;
         public TextView nameTextView;
         public TextView dateTextView;
+        public TextView chapterTextView;
 
         public ActionViewHolder(View view) {
             super(view);
             this.containerView = view.findViewById(R.id.action_row);
             this.nameTextView = view.findViewById(R.id.action_row_text_view);
             this.dateTextView = view.findViewById(R.id.action_row_date_view);
+            this.chapterTextView = view.findViewById(R.id.action_row_chapter_view);
 
             containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Action3 current = (Action3) containerView.getTag();
                     Intent intent = new Intent(v.getContext(), EditActivity.class);
-                    intent.putExtra("name", current.content);
+                    intent.putExtra("name", current.title);
                     intent.putExtra("id",current.id);
+                    intent.putExtra("chapter",current.chapter);
                     intent.putExtra("FROM_TAB","TAB2");
 
                     v.getContext().startActivity(intent);
@@ -75,8 +78,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Action
         String nextRevisionFormatted = formatter.format(nextRevision);
 
         holder.containerView.setTag(current);
-        holder.nameTextView.setText(current.content);
+        holder.nameTextView.setText(current.title);
         holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), nextRevisionFormatted));
+        holder.chapterTextView.setText("Chapter " + current.chapter);
     }
 
     @Override

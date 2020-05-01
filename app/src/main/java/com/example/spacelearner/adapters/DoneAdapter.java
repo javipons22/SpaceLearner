@@ -52,8 +52,8 @@ public class DoneAdapter extends RecyclerView.Adapter<DoneAdapter.ActionViewHold
         Date date = new Date();
         Action3 current = actions.get(position);
         holder.containerView.setTag(current);
-        holder.nameTextView.setText(current.content);
-        holder.dateTextView.setText("date");
+        holder.nameTextView.setText(current.title);
+        holder.dateTextView.setText("Finished");
 }
 
     @Override

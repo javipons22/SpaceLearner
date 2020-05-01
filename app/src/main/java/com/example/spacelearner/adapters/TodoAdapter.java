@@ -27,20 +27,23 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHold
         public LinearLayout containerView;
         public TextView nameTextView;
         public TextView dateTextView;
+        public TextView chapterTextView;
 
         public ActionViewHolder(View view) {
             super(view);
             this.containerView = view.findViewById(R.id.action_row);
             this.nameTextView = view.findViewById(R.id.action_row_text_view);
             this.dateTextView = view.findViewById(R.id.action_row_date_view);
+            this.chapterTextView = view.findViewById(R.id.action_row_chapter_view);
 
             containerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Action3 current = (Action3) containerView.getTag();
                     Intent intent = new Intent(v.getContext(), EditActivity.class);
-                    intent.putExtra("name", current.content);
+                    intent.putExtra("name", current.title);
                     intent.putExtra("id",current.id);
+                    intent.putExtra("chapter",current.chapter);
                     intent.putExtra("FROM_TAB","TAB1");
 
                     v.getContext().startActivity(intent);
@@ -67,15 +70,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.ActionViewHold
     public void onBindViewHolder(ActionViewHolder holder, int position) {
         Action3 current = actions.get(position);
 
-        // All functions for calculating date diff with TimeLeftCalculator
-        SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy HH:mm");
-        Date date = new Date();
-        Date nextRevision = new Date(current.nextRevision);
-        String nextRevisionFormatted = formatter.format(nextRevision);
-
         holder.containerView.setTag(current);
-        holder.nameTextView.setText(current.content);
-        holder.dateTextView.setText(TimeLeftCalculator.getTimeLeft(formatter.format(date), nextRevisionFormatted));
+        holder.nameTextView.setText(current.title);
+        holder.chapterTextView.setText("Chapter " + current.chapter);
+        holder.dateTextView.setText("Revise NOW");
     }
 
     @Override

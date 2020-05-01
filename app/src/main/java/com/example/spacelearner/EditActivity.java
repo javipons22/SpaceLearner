@@ -11,21 +11,26 @@ import android.widget.EditText;
 import java.util.Date;
 
 public class EditActivity extends AppCompatActivity {
-    String content;
+
     String previousTab;
     EditText bookName;
-    EditText chapter;
+    EditText chapterNumber;
     Button editButton;
     Button deleteButton;
     Button reviseButton;
     String name;
+    String bookString;
+    String chapterString;
+    String chapter;
     int id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
         name = getIntent().getStringExtra("name");
+        chapter = getIntent().getStringExtra("chapter");
         id = getIntent().getIntExtra("id",0);
         previousTab = getIntent().getStringExtra("FROM_TAB");
 
@@ -33,10 +38,10 @@ public class EditActivity extends AppCompatActivity {
         editButton = (Button) findViewById(R.id.button_edit);
         deleteButton = (Button) findViewById(R.id.button_delete);
         reviseButton = (Button) findViewById(R.id.button_revised);
-        chapter = (EditText) findViewById(R.id.chapter);
+        chapterNumber = (EditText) findViewById(R.id.chapter);
 
         bookName.setText(name);
-        chapter.setText(Integer.toString(id));
+        chapterNumber.setText(chapter);
 
         if (previousTab.equals("TAB2")){
             reviseButton.setVisibility(View.GONE);
@@ -45,12 +50,13 @@ public class EditActivity extends AppCompatActivity {
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                content = bookName.getText().toString();
+                bookString = bookName.getText().toString();
+                chapterString = chapterNumber.getText().toString();
 //                if (content.length() > 0) {
 //                    now = new Date();
 //                    currentDate = now.getTime();
 //                    nextRevisionDate = currentDate + 24 * 60 * 60 * 1000;
-                    MainActivity.database.actionDao().updateValues(content,id);
+                    MainActivity.database.actionDao().updateValues(bookString,chapterString,id);
                     finish();
 //                }
 

@@ -48,7 +48,7 @@ public class TimeLeftCalculator {
                     timeLeft = "Next Revision in " + minutesLeft + " minutes";
                 }
             } else {
-                timeLeft = "Next Revision NOW";
+                timeLeft = "Next Revision in 1 minute";
             }
 //            int diffsec = (int) (diff / (1000));
 //            System.out.println("difference between seconds: " + crunchifyFormatter.format(diffsec));

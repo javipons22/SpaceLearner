@@ -24,13 +24,27 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="15dp">
-        <TextView
-            android:id="@+id/action_row_text_view"
-            android:layout_width="210dp"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/action_row_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/action_row_chapter_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <TextView
             android:id="@+id/action_row_date_view"
-            android:layout_width="207dp"
+            android:layout_width="wrap_content"
+            android:textSize="12dp"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

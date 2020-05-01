@@ -9,8 +9,11 @@ public class Action3 {
     @PrimaryKey
     public int id;
 
-    @ColumnInfo(name = "content")
-    public String content;
+    @ColumnInfo(name = "title")
+    public String title;
+
+    @ColumnInfo(name = "chapter")
+    public String chapter;
 
     @ColumnInfo(name = "addedDate")
     public Long addedDate;

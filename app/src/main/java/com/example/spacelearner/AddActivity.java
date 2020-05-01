@@ -12,8 +12,10 @@ import java.util.Date;
 
 public class AddActivity extends AppCompatActivity {
 
-    String content;
+    String title;
+    String chapterNumber;
     EditText bookName;
+    EditText chapter;
     Button submitButton;
     Date now;
     Long currentDate;
@@ -24,17 +26,19 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         bookName = (EditText) findViewById(R.id.book_name);
+        chapter = (EditText) findViewById(R.id.chapter);
         submitButton = (Button) findViewById(R.id.submit);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                content = bookName.getText().toString();
-                if (content.length() > 0) {
+                title = bookName.getText().toString();
+                chapterNumber = chapter.getText().toString();
+                if (title.length() > 0) {
                     now = new Date();
                     currentDate = now.getTime();
                     nextRevisionDate = currentDate + 1 * 60 * 1000;
-                    MainActivity.database.actionDao().create(content,currentDate,0,nextRevisionDate,3);
+                    MainActivity.database.actionDao().create(title,chapterNumber,currentDate,0,nextRevisionDate,3);
                     finish();
                 }
 

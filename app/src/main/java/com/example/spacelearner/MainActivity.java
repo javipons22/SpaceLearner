@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         database = Room
                 .databaseBuilder(getApplicationContext(), ActionsDatabase2.class, "actions5")
                 .allowMainThreadQueries()
-//                .fallbackToDestructiveMigration()
+                .fallbackToDestructiveMigration()
 //                .addMigrations(ActionsDatabase2.MIGRATION_1_2)
                 .build();
 
